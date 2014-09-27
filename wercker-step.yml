@@ -1,5 +1,5 @@
 name: add-add-host-identityfile
-version: 1.0.1
+version: 1.0.2
 description: |
   Populate .ssh/config with a new Host and IdentityFile entry.
   Generate an SSH key using Wercker (Check "Settings" tab under your app.)

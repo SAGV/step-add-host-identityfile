@@ -5,3 +5,10 @@ description: |
   Generate an SSH key using Wercker (Check "Settings" tab under your app.)
   This step can be used to write these values to an IdentityFile
   and add them to the SSH configuration.
+keywords:
+  - git
+  - ssh
+  - key
+  - identityfile
+  - pem
+  - host

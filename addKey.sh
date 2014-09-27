@@ -1,16 +1,32 @@
 #!/bin/bash
 
-if [ ! -d "$1/.ssh" ]; then
-   mkdir -p "$1/.ssh"
-   chown $2 "$1/.ssh"
+home=$1
+user=$2
+
+host=$3
+host_alias=$4
+pempath=$5
+
+# Make sure ~/.ssh exists.
+if [ ! -d "$home/.ssh" ]; then
+   mkdir -p "$home/.ssh"
+   chown $user "$home/.ssh"
 fi
 
-if [ ! -f $1/.ssh/config ]; then
-  echo "IdentityFile $3" > $1/.ssh/config
-  chown $2 $1/.ssh/config
-  chmod 0600 $1/.ssh/config
-  echo "$1/.ssh/config created"
-else
-  sed -i -e "1i IdentityFile $3" $1/.ssh/config
-  echo "$1/.ssh/config updated"
+# Make sure ~/.ssh/config exists.
+if [ ! -f $home/.ssh/config ]; then
+  touch $home/.ssh/config
+  chown $user $home/.ssh/config
+  chmod 0600 $home/.ssh/config
+  echo "$home/.ssh/config created"
 fi
+
+# Use "Hostname" if the alias is not specified
+if [ -z "$host_alias" ]; then
+	host_alias=$host
+fi
+
+echo "Host $host_alias" >> $home/.ssh/config
+echo "  Hostname $host" >> $home/.ssh/config
+echo "  IdentityFile $pempath" >> $home/.ssh/config
+echo "$home/.ssh/config updated"

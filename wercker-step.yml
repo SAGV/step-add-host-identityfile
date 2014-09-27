@@ -1,7 +1,7 @@
-name: add-ssh-key
-version: 1.0.0
+name: add-add-host-identityfile
+version: 1.0.1
 description: |
-  Wercker allows you to generate SSH keys and expose them as via
-  environment variables to your build or deployment pipeline.
-  This step can be used to write these values to an EdentityFile
+  Populate .ssh/config with a new Host and IdentityFile entry.
+  Generate an SSH key using Wercker (Check "Settings" tab under your app.)
+  This step can be used to write these values to an IdentityFile
   and add them to the SSH configuration.

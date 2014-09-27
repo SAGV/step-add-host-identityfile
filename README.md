@@ -1,12 +1,11 @@
-# Step add-ssh-key
+# Step add-host-identityfile
 
-Wercker allows you to generate SSH keys and expose them as via
-environment variables to your build or deployment pipeline.
-This step can be used to write these values to an IdentityFile
-and add them to the SSH configuration.
+Populate `.ssh/config` with a new Host and IdentityFile entry.
 
 # Options
 
+- `hostname` The actual url responsible for the alias.
+- `alias` (optional) The name of the host to access via the IdentityFile. Will use `hostname` if not specified.
 - `keyname` The name of the key variable to export, this is without the dollar sign prefix and without the `_PUBLIC` or `_PRIVATE` suffix.
 
 # Example
@@ -14,15 +13,27 @@ and add them to the SSH configuration.
 ``` yaml
 build:
     steps:
-        - add-ssh-key:
+        - siminm/step-add-host-identityfile:
+            hostname: mycustomwebsite.com
+            alias: production
             keyname: MYPACKAGE_KEY
 ```
 
-# What's new
+This will add the following entry to the .ssh/config file for your user and root.
 
-Validate if a key is being written
+```
+Host production
+  Hostname mycustomwebsite.com
+  IdentityFile /some/wercker/tmp/path/file
+```
+
+# siminm/add-host-identityfile
+
+## 1.0.1
+
+- Insert IdentityFile under a specific Host entry.
  
-# Changelog
+# wercker/step-add-ssh-key Changelog
 
 ## 1.0.0
 
@@ -45,3 +56,4 @@ Validate if a key is being written
 The MIT License (MIT)
 
 Copyright (c) 2013 wercker
+Copyright (c) 2014 Mikhail Simin
